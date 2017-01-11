@@ -3,33 +3,44 @@
 namespace core;
 
 /**
- * router - splits the URL, checks the routing table and loads the appropriate
- * class and function.
+ * Router - this is the real meat of Lunar. Takes the URL, splits it into meaninful
+ * parts, and uses the parts to load a Controller class.
+ *
+ * @package core\Router
+ *
+ * @since 0.0.1 Initial code commit
+ *
+ * @version 1.0 Initial code commit
+ *
+ * @author James Filby <jim@deadcowdesign.co.uk>
+ *
+ * @license GPL, or GNU General Public License, version 2
+ *
  */
 class Router
 {
-
     protected $route_data = null;
     protected $className  = null;
     protected $methodName = null;
     protected $methodData = null;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->route_data = new \stdClass();
         $this->route_data->controller = null;
         $this->route_data->action     = null;
         $this->route_data->data       = null;
-
     }
 
     public function executeRoute()
     {
 
-        $route_data = $this->parseURI();
-        $class      = $this->createClassName($route_data->controller);
-        $method     = $this->createMethodName($route_data->action);
-        $data       = $this->createMethodData($route_data->data);
+        $this->parseURI();
+
+        $class      = $this->createClassName($this->route_data->controller);
+        $method     = $this->createMethodName($this->route_data->action);
+        $data       = $this->createMethodData($this->route_data->data);
 
         if (!class_exists($class)) {
 
@@ -55,7 +66,7 @@ class Router
 
     /**
      * resolveRoute takes a uri, checks against the routes table for any route overrides
-     * breaks the uri up into segments and processes those segments, before finally 
+     * breaks the uri up into segments and processes those segments, before finally
      * loading a class and method based on the uri parts.
      *
      * @return [type] [description]
@@ -74,13 +85,11 @@ class Router
 
         $path_parts = explode('/', $path);
 
-        $route_data = new \stdClass();
+        $this->route_data->controller = $this->dehyphenate(array_shift($path_parts));
+        $this->route_data->action     = $this->dehyphenate(array_shift($path_parts));
+        $this->route_data->data       = $path_parts;
 
-        $route_data->controller = $this->dehyphenate(array_shift($path_parts));
-        $route_data->action     = $this->dehyphenate(array_shift($path_parts));
-        $route_data->data       = $path_parts;
-
-        return $route_data;
+        return true;
     }
 
     /**
@@ -115,8 +124,9 @@ class Router
 
         if (!$strIn) {
 
-            if (defined("DEFAULT_CONTROLLER"))  {
-            $strOut = "Lunar\Controller\\" . DEFAULT_CONTROLLER . "Controller";
+            if (defined("DEFAULT_CONTROLLER")) {
+
+                $strOut = "Lunar\Controller\\" . DEFAULT_CONTROLLER . "Controller";
             }
 
         } else {
@@ -146,6 +156,8 @@ class Router
 
             $strOut = lcfirst($strIn) . "Action";
         }
+
+        highlight_string("<?php\n\$data =\n" . var_export($strOut, true) . ";\n?>");
 
         return $strOut;
     }
@@ -178,7 +190,7 @@ class Router
 
         $routes = array();
 
-        include(BASE_PATH . "/routes.php");
+        include(BASE_PATH . "/Routes.php");
 
         if (array_key_exists($path, $routes)) {
 

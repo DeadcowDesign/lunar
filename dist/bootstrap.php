@@ -1,14 +1,16 @@
 <?php
 
-class bootstrap {
+class Bootstrap
+{
 
     /**
      * startApplication - get the configuration, do the PHP ini stuff and load the autoloader, then
      * run the autoloader.
-     * 
+     *
      * @return [bool] [true]
      */
-    public static function startApplication() {
+    public static function startApplication()
+    {
 
 
         ini_set('display_errors', 1);

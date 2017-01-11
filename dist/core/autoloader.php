@@ -3,10 +3,17 @@
 namespace core;
 
 /**
- * Autoloader - responsible for autoloading classes
+ * Autoloader - Basic SPL autoloader responsible for loading classes
  *
- * @author  James Filby <jim@deadcowdesign.co.uk>
- * @copyright 2016
+ * @package core\Autoloader
+ *
+ * @version 1.0 - Initial code commit
+ *
+ * @since 0.0.1 - Initial code commit
+ *
+ * @author  James Filby <jim@deadcowdesign.co.uk
+ *
+ * @license GPL, or GNU General Public License, version 2
  *
  */
 class Autoloader
@@ -31,4 +38,4 @@ class Autoloader
     }
 }
 
-spl_autoload_register('core\autoloader::load');
+spl_autoload_register('core\Autoloader::load');

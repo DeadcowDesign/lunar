@@ -1,16 +1,21 @@
 <?php
 
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+/**
+ * index.php is the entry point for the application. Simply calls and runs
+ * the Bootstrap class which kicks off the router/controller cycle.
+ *
+ * @package core
+ *
+ * @version 1.0 Initial code commit
+ *
+ * @since 0.0.1 Initial code commit
+ *
+ * @author  James Filby <jim@deadcowdesign.co.uk>
+ *
+ * @license GPL, or GNU General Public License, version 2
+ *
+ */
 
-require_once(dirname(__FILE__) . '/config.php');
-require_once(dirname(__FILE__) . '/core/autoloader.php');
-
-$router = new core\router();
-
-$router->executeRoute();*/
-
-require_once("bootstrap.php");
+require_once("Bootstrap.php");
 
 bootstrap::startApplication();
