@@ -3,15 +3,17 @@
 namespace core;
 
 /**
- * autoloader - responsible for autoloading classes
+ * Autoloader - responsible for autoloading classes
  *
  * @author  James Filby <jim@deadcowdesign.co.uk>
  * @copyright 2016
- * 
+ *
  */
-class autoloader {
+class Autoloader
+{
 
-    public static function load($class = null) {
+    public static function load($class = null)
+    {
 
         $filename = BASE_PATH . '/' . str_replace('\\', '/', $class) . ".php";
 
@@ -21,11 +23,11 @@ class autoloader {
 
             if (class_exists($class)) {
 
-                return TRUE;
+                return true;
             }
         }
 
-        return FALSE;
+        return false;
     }
 }
 

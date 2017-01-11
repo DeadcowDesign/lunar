@@ -6,7 +6,8 @@ namespace core;
  * router - splits the URL, checks the routing table and loads the appropriate
  * class and function.
  */
-class router {
+class Router
+{
 
     protected $route_data = null;
     protected $className  = null;
@@ -22,7 +23,8 @@ class router {
 
     }
 
-    public function executeRoute() {
+    public function executeRoute()
+    {
 
         $route_data = $this->parseURI();
         $class      = $this->createClassName($route_data->controller);
@@ -55,10 +57,11 @@ class router {
      * resolveRoute takes a uri, checks against the routes table for any route overrides
      * breaks the uri up into segments and processes those segments, before finally 
      * loading a class and method based on the uri parts.
-     * 
+     *
      * @return [type] [description]
      */
-    protected function parseURI() {
+    protected function parseURI()
+    {
 
         if (!$_SERVER['REQUEST_URI']) {
 
@@ -82,21 +85,22 @@ class router {
 
     /**
      * dehyphenate - remove hyphens from a string and camel case.
-     * 
+     *
      * @param  [type] $string [description]
      * @return [type]         [description]
      */
-    protected function dehyphenate($strIn) {
-        
+    protected function dehyphenate($strIn)
+    {
+
         $strOut = '';
 
         $strParts = explode('-', $strIn);
-                
-        while($strParts) {
-            
+
+        while ($strParts) {
+
             $strOut .= ucfirst(array_shift($strParts));
         }
-        
+
         return $strOut;
     }
 
@@ -104,7 +108,8 @@ class router {
      * Create a class name from a given controller name.
      * @return [type] [description]
      */
-    protected function createClassName($strIn = null) {
+    protected function createClassName($strIn = null)
+    {
 
         $strOut = "";
 
@@ -126,7 +131,8 @@ class router {
      * create a method name from the given action name.
      * @return [type] [description]
      */
-    protected function createMethodName($strIn = null) {
+    protected function createMethodName($strIn = null)
+    {
 
         $strOute = "";
 
@@ -144,11 +150,12 @@ class router {
         return $strOut;
     }
 
-    protected function createMethodData($arrIn = null) {
+    protected function createMethodData($arrIn = null)
+    {
 
         $arrOut = array();
 
-        while($arrIn) {
+        while ($arrIn) {
 
             $key = array_shift($arrIn);
             $value = array_shift($arrIn);
@@ -158,6 +165,7 @@ class router {
 
         return $arrOut;
     }
+
     /**
      * checkRoutesTable - checks the routes table for an equivalent route, and if one
      * is found, returns that route. Note that currently this is a 1:1 check - data in
@@ -165,7 +173,8 @@ class router {
      * @param  string $path [description]
      * @return [type]       [description]
      */
-    protected function checkRoutesTable($path = '') {
+    protected function checkRoutesTable($path = '')
+    {
 
         $routes = array();
 
