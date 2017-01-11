@@ -134,7 +134,7 @@ class Router
     protected function createMethodName($strIn = null)
     {
 
-        $strOute = "";
+        $strOut = "";
 
         if (!$strIn) {
 
