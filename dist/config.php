@@ -14,6 +14,7 @@ define("BASE_URL", '/lunar/dist/');                         // The application r
 /**
  * Application defaults
  */
+define("APPLICATION_NAME", 'Lunar');
 define("DEFAULT_CONTROLLER", "Home");
 define("DEFAULT_ACTION", "index");
 define("ERROR_CONTROLLER", "Error");

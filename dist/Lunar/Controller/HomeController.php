@@ -3,9 +3,9 @@
 namespace Lunar\Controller;
 
 
-class TestController extends Controller {
+class HomeController extends Controller {
 
-    public function testAction($data = null) {
+    public function indexAction($data = null) {
 
     	$this->twig->display("index.html.twig");
     }

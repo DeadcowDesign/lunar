@@ -30,10 +30,11 @@ class Router
         $class      = $this->createClassName($route_data->controller);
         $method     = $this->createMethodName($route_data->action);
         $data       = $this->createMethodData($route_data->data);
+        $errorController = "\\" . APPLICATION_NAME . '\Controller\ErrorController';
 
         if (!class_exists($class)) {
 
-            $page = new \Lunar\Controller\ErrorController();
+            $page = new $errorController();
             $page->notFoundAction();
 
         } else {
@@ -41,7 +42,7 @@ class Router
             $page = new $class();
 
             if (!method_exists($page, $method)) {
-                $page = new \Lunar\Controller\ErrorController();
+                $page = new $errorController();;
                 $page->notFoundAction();
 
             } else {
@@ -116,12 +117,12 @@ class Router
         if (!$strIn) {
 
             if (defined("DEFAULT_CONTROLLER"))  {
-            $strOut = "Lunar\Controller\\" . DEFAULT_CONTROLLER . "Controller";
+            $strOut = APPLICATION_NAME . "\Controller\\" . DEFAULT_CONTROLLER . "Controller";
             }
 
         } else {
 
-            $strOut = "Lunar\Controller\\" . ucfirst($strIn) . "Controller";
+            $strOut = APPLICATION_NAME . "\Controller\\" . ucfirst($strIn) . "Controller";
         }
 
         return $strOut;
@@ -134,7 +135,7 @@ class Router
     protected function createMethodName($strIn = null)
     {
 
-        $strOute = "";
+        $strOut = "";
 
         if (!$strIn) {
 
