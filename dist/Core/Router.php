@@ -3,8 +3,18 @@
 namespace Core;
 
 /**
- * router - splits the URL, checks the routing table and loads the appropriate
- * class and function.
+ * Core\Router
+ * 
+ * THIS IS A CORE LUNAR FILE ALTER AT OWN RISK!
+ * 
+ * The router represents the main core of Lunar's functionality. This takes the
+ * page URL and breaks it into tokens that Lunar can understand. These are then
+ * processed and concatenated into strings which equate into classes and methods
+ * which are then processed by the autoloader.
+ * 
+ * @author  James Filby <jim@deadcowdesign.co.uk>
+ * @copyright 2016
+ * @since 0.0.1
  */
 class Router
 {
@@ -30,20 +40,16 @@ class Router
         $class      = $this->createClassName($route_data->controller);
         $method     = $this->createMethodName($route_data->action);
         $data       = $this->createMethodData($route_data->data);
-        $errorController = "\\" . APPLICATION_NAME . '\Controller\ErrorController';
 
         if (!class_exists($class)) {
-
-            $page = new $errorController();
-            $page->notFoundAction();
+            $this->doError('notFound');
 
         } else {
 
-            $page = new $class();
+            $page = new $class($this->className, $this->methodName);
 
             if (!method_exists($page, $method)) {
-                $page = new $errorController();;
-                $page->notFoundAction();
+                $this->doError('notFound');
 
             } else {
 
@@ -54,8 +60,26 @@ class Router
         return true;
     }
 
+    public function doError($errorType) {
+        $errorController = "\\" . APPLICATION_NAME . '\Controller\ErrorController';
+        $errorType = $errorType . "Action";
+
+        if (!class_exists($errorController)) {
+            header("HTTP/1.0 404 Not Found");
+            die();
+        }
+
+        $page = new $errorController();
+
+        if (!method_exists($page, $errorType)) {
+            header("HTTP/1.0 404 Not Found");
+            die();
+        }
+
+        $page->$errorType();
+    }
     /**
-     * resolveRoute takes a uri, checks against the routes table for any route overrides
+     * parseURI takes a uri, checks against the routes table for any route overrides
      * breaks the uri up into segments and processes those segments, before finally 
      * loading a class and method based on the uri parts.
      *
@@ -117,11 +141,12 @@ class Router
         if (!$strIn) {
 
             if (defined("DEFAULT_CONTROLLER"))  {
-            $strOut = APPLICATION_NAME . "\Controller\\" . DEFAULT_CONTROLLER . "Controller";
+                $this->className = DEFAULT_CONTROLLER;
+                $strOut = APPLICATION_NAME . "\Controller\\" . DEFAULT_CONTROLLER . "Controller";
             }
 
         } else {
-
+            $this->className = ucfirst($strIn);
             $strOut = APPLICATION_NAME . "\Controller\\" . ucfirst($strIn) . "Controller";
         }
 
@@ -140,11 +165,12 @@ class Router
         if (!$strIn) {
 
             if (defined("DEFAULT_ACTION")) {
+                $this->methodName = DEFAULT_CONTROLLER;
                 $strOut = DEFAULT_ACTION . "Action";
             }
 
         } else {
-
+            $this->methodName = lcfirst($strIn);
             $strOut = lcfirst($strIn) . "Action";
         }
 

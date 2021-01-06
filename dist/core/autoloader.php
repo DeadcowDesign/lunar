@@ -3,11 +3,17 @@
 namespace Core;
 
 /**
- * Autoloader - responsible for autoloading classes
- *
+ * Core\Autoloader
+ * 
+ * THIS IS A CORE LUNAR FILE ALTER AT OWN RISK!
+ * 
+ * This is the core functionality for the autoloader. It uses basic 
+ * SPL autoloading and is based on the directory structure matching the application
+ * structure.
+ * 
  * @author  James Filby <jim@deadcowdesign.co.uk>
  * @copyright 2016
- *
+ * @since 0.0.1
  */
 class Autoloader
 {
