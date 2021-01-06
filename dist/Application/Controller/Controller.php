@@ -1,13 +1,13 @@
 <?php
 
-namespace Lunar\Controller;
+namespace Application\Controller;
 
 /**
  * Controller is the base controller class. Can be used to initialise
  * common functions amongst other classes (for example, template engine
  * initialisation). Uses a function called init which is called on construct.
  */
-class Controller extends \core\controller {
+class Controller extends \Core\Controller {
 
 	public $twig = null;
 
@@ -20,7 +20,7 @@ class Controller extends \core\controller {
 
 
     	//Adding twig to test if easy.
-    	require_once BASE_PATH . '/Lunar/Libs/Twig/Autoloader.php';
+    	require_once BASE_PATH . '/Application/Libs/Twig/Autoloader.php';
 		\Twig_Autoloader::register(); 
     	
     	$loader = new \Twig_Loader_Filesystem(TWIG_TEMPLATE_PATH);

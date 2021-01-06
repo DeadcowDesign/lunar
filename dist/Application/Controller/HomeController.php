@@ -1,6 +1,6 @@
 <?php
 
-namespace Lunar\Controller;
+namespace Application\Controller;
 
 
 class HomeController extends Controller {

@@ -1,6 +1,6 @@
 <?php
 
-namespace core;
+namespace Core;
 
 /**
  * Autoloader - responsible for autoloading classes

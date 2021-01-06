@@ -16,9 +16,9 @@ class bootstrap {
         error_reporting(E_ALL);
 
         require_once(dirname(__FILE__) . '/config.php');
-        require_once(dirname(__FILE__) . '/core/autoloader.php');
+        require_once(dirname(__FILE__) . '/Core/Autoloader.php');
 
-        $router = new core\router();
+        $router = new Core\Router();
 
         $router->executeRoute();
 

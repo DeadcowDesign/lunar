@@ -1,6 +1,6 @@
 <?php
 
-namespace core;
+namespace Core;
 
 /**
  * router - splits the URL, checks the routing table and loads the appropriate

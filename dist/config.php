@@ -14,9 +14,12 @@ define("BASE_URL", '/lunar/dist/');                         // The application r
 /**
  * Application defaults
  */
-define("APPLICATION_NAME", 'Lunar');
+define("APPLICATION_NAME", 'Application');
 define("DEFAULT_CONTROLLER", "Home");
 define("DEFAULT_ACTION", "index");
 define("ERROR_CONTROLLER", "Error");
 
+/**
+ * User defined configs
+ */
 define("TWIG_TEMPLATE_PATH", BASE_PATH . "/templates/");
