@@ -3,7 +3,7 @@
 namespace Application\Controller;
 
 /**
- * Application\Controller\HomeController
+ * Application\Controller\AboutController
  * 
  * This is the default controller specified by basic Lunar configuration. This
  * and the indexAction function will determine what will be shown when the user 
@@ -14,7 +14,7 @@ namespace Application\Controller;
  * @copyright 2016
  * @since 0.0.1
  */
-class HomeController extends Controller {
+class AboutController extends Controller {
 
     /**
      * This is the page that is available at either /home/index, or the root

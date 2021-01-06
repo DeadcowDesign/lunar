@@ -1,8 +1,6 @@
 lunar
 =====
 
-## Introduction
-Lunar is a super lightweight, minimal config, framework for rapid prototyping and
-application development. It consists of the most basic functionality for creating
-and deploying an application, and makes minimal assumptions about the nature
-of the application being created.
+## What is Lunar?
+Lunar is an easy to use, minimal config, router/controller. It is designed as a
+skeleton or jumping off point for your own project.

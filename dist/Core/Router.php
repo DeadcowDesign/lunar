@@ -165,7 +165,7 @@ class Router
         if (!$strIn) {
 
             if (defined("DEFAULT_ACTION")) {
-                $this->methodName = DEFAULT_CONTROLLER;
+                $this->methodName = DEFAULT_ACTION;
                 $strOut = DEFAULT_ACTION . "Action";
             }
 
