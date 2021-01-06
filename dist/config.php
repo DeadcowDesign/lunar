@@ -22,4 +22,3 @@ define("ERROR_CONTROLLER", "Error");
 /**
  * User defined configs
  */
-define("TWIG_TEMPLATE_PATH", BASE_PATH . "/templates/");
